@@ -1,4 +1,5 @@
 import sys
+import tree_drawer
 
 numbers = '123456789'
 operators = '-+/*^'
@@ -79,6 +80,7 @@ def find_parenthesis_expression(expression):
 
 # Verifica que el numero de parentesis y llaves, así como su orden sean correctos
 def is_balanced(expression):
+	# Se utiliza una pila para mantener el orden de los parentesis y llaves
     stack = []
     # Diccionario que contiene los caracteres para abrir y cerrar
     matching_bracket = {')': '(', ']': '['}
@@ -115,6 +117,8 @@ def build_tree(expression):
     
     return root
 
+
+
 def print_tree(node, level=0):
     if node is not None:
         print_tree(node.right, level + 1)
@@ -138,7 +142,7 @@ def validate_expression():
 		sys.exit()
 # Se declara la expresion a evaluar
 expression = '2*4-1(5[7+3]+2)'
-expression = '2*4^5-15/32'
+expression = '2*4^5-6/32-78'
 found_invalid, invalid_character = validateCharacters(expression)
 
 print(find_less_weight(expression))
@@ -166,3 +170,6 @@ tree_root = build_tree(expression)
 
 print("Expression Tree:")
 print_tree(tree_root)
+# tree_drawer.plot_tree(tree_root)
+
+tree_drawer.show_tree(tree_root)
