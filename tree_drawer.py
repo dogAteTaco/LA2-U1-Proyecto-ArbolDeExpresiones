@@ -72,60 +72,24 @@ def add_nodes_positions(G,node, x, y, node_count, left_count, right_count, pos, 
 def show_tree(root_node):
     G = nx.Graph()
     
-    # G.add_node('a')
-    # G.add_nodes_from([2, 3])
-    # G.add_nodes_from([(4, {"color": "red"}), (5, {"color": "green"})])
-
-    # left_nodes = 0
-    # current_node = root_node
-    # while current_node != None:
-    #     left_nodes = left_nodes + 1
-    #     current_node = current_node.left
-
-    # right_nodes = 0
-    # current_node = root_node
-    # while current_node != None:
-    #     right_nodes = right_nodes + 1
-    #     current_node = current_node.right
-    # print(left_nodes)
-    # print(right_nodes)
-
-    # # Specify positions for each node
-    # pos = {
-    #      '0': (0, 0),  # (x, y) coordinates for node 'a'
-    # }
-    # labels = {}
-    # current_node_count = 1
-    # if root_node != None:
-    #     G.add_node(str(current_node_count))
-    #     pos[str(current_node_count)] = (0,0)
-    #     current_node_count = current_node_count + 1
-    # # Optionally specify labels if needed
-    
-    # while current_node != None:
-    #     while current_node.left != None:
-    #         current_node = current_node.left
-    #         current_node_count = current_node_count + 1
-    #         print(current_node_count)
-    #         G.add_node(str(current_node_count))
-    #         pos[str(current_node_count)]=(5,current_node_count)
-    #         labels[str(current_node_count)] = current_node.left.value
-    # print(pos)
     pos = {}
     labels = {}
+    layer = 0
     def add_nodes_positions(node, x, y, node_count):
         if node is not None:
+            print(layer)
             # Add the node to the graph
             G.add_node(str(node_count))
-            
+            layer_inside = layer+0.25
             # Set the position and label for the node
             pos[str(node_count)] = (x, y)
             labels[str(node_count)] = node.value
-            
+
             # Traverse the left subtree
             if node.left is not None:
                 left_count = node_count + 1
                 G.add_edge(str(node_count), str(left_count))
+                new_x = (x-2)
                 left_count = add_nodes_positions(node.left, x - 1, y - 1, left_count)
             
             # Traverse the right subtree
